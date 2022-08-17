@@ -52,6 +52,11 @@ class Client:
         self.last_scanned_completed = request['data'][self.parameters.refresh_limit-1]['id']
       except IndexError:
         self.last_scanned_outbound = None
+        
+      # gets authenticated users info
+      request = self.client.get('https://users.roblox.com/v1/users/authenticated').json()
+      self.id = request['id']
+      self.user = request['name']
 
   def run(self):   
     # run loop to start threads
